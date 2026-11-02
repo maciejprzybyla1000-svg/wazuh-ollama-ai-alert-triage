@@ -41,7 +41,7 @@ const searchAlert = {
 };
 const searchAnalysis = {
   severity: 'low',
-  summary: 'Zdarzenie 4688 zarejestrowało utworzenie SearchFilterHost.exe przez SearchIndexer.exe na koncie LAB-WIN10$.',
+  summary: 'Zdarzenie 4688 zarejestrowało utworzenie SearchFilterHost.exe przez SearchIndexer.exe na koncie Lab-Win10$.',
   checks: [
     'Sprawdź, czy użytkownik oczekiwał utworzenie procesu w tym czasie.',
     'Sprawdź, czy SearchFilterHost.exe i SearchIndexer.exe są powiązane z alertem.',
