@@ -1,8 +1,6 @@
 # Wazuh AI Alert Triage Lab
 
-A hands-on SOC lab for collecting Windows security events with Wazuh and comparing Wazuh rule severity with a local AI analyst powered by Ollama. The project explores how an LLM can help explain alerts, where its interpretation can be wrong, and how selected claims can be checked against the original event fields.
-
-This lab demonstrates my practical use of Wazuh and a local LLM (Ollama) to triage Windows security alerts, validate AI-generated claims against event evidence, and keep a human analyst in the loop.
+A hands-on SOC lab for collecting Windows security events with Wazuh and comparing Wazuh rule severity with a local AI analyst powered by Ollama. The project explores how an LLM can help explain alerts, where its interpretation can be wrong, and how selected claims can be checked against the original event fields. This lab demonstrates my practical use of Wazuh and a local LLM (Ollama) to triage Windows security alerts, validate AI-generated claims against event evidence, and keep a human analyst in the loop.
 
 ## Lab Architecture
 
@@ -19,9 +17,13 @@ This lab demonstrates my practical use of Wazuh and a local LLM (Ollama) to tria
 
 A controlled failed interactive logon generated Windows Security Event ID `4625` and Wazuh rule `60122` (level 5).
 
-The investigation compared the event details with the AI summary. The event identified a failed local logon; it did not, by itself, establish remote access or malicious activity.
+The event identified a failed local logon; it did not, by itself, establish remote access or malicious activity. The AI wording was reviewed against the original event before drawing conclusions.
 
 **Status:** Collected and reviewed in Wazuh and the local app.
+
+![INC-001: Wazuh event 4625 and rule 60122](screenshots/inc-001-failed-logon.png)
+
+*Wazuh classifies the failed logon at level 5. Host and timestamp values are redacted in this screenshot.*
 
 ### INC-002 — Windows Service Start-Type Change
 
@@ -31,6 +33,12 @@ The event ran in the `SYSTEM` security context and did not identify a human user
 
 **Status:** Collected and reviewed in Event Viewer, Wazuh, and the local app.
 
+![INC-002: Wazuh triage for the UCPD service change](screenshots/inc-002-ucpd-triage.png)
+
+![INC-002: Windows Event Viewer details for event 7040](screenshots/inc-002-ucpd-event-viewer.png)
+
+*Event Viewer confirms the UCPD start-type change and shows SYSTEM as the security context. It does not identify a person or initiating process. The computer name is redacted.*
+
 ### INC-003 — Elevated MMC Process Creation
 
 Windows Security Event ID `4688` recorded `mmc.exe`, launched by `explorer.exe` for the `Admin` target account. The event contained token type `%%1937` (type 2, elevated) and high integrity label `S-1-16-12288`; the command line was empty.
@@ -39,17 +47,25 @@ The event was consistent with opening a Windows management console in the lab. T
 
 **Status:** Collected and reviewed; matching AI claims pass the 4688 consistency check.
 
+![INC-003: Event 4688 process details for mmc.exe](screenshots/inc-003-mmc-elevated-process.png)
+
+*The captured fields show `mmc.exe`, its parent process, token type 2, high integrity, and an empty command line. The local account name is redacted.*
+
 ### INC-004 — Windows Search Process and AI Claim Validation
 
 Windows Security Event ID `4688` recorded `SearchFilterHost.exe` launched by `SearchIndexer.exe`. The target account and command line were absent. Token value `%%1936` maps to type 1, and `S-1-16-8192` is a medium integrity label.
 
-The model initially attributed the process to the computer account and described the token as type 2. The app's targeted 4688 validator detected these unsupported or conflicting claims and replaced the summary and checks with text grounded in the alert fields.
+The model initially attributed the process to the computer account and described the token as type 2. The app's targeted 4688 validator detected unsupported or conflicting claims and showed a field-grounded correction.
 
 **Status:** Collected; validator regression test passes for both INC-003 and INC-004.
 
+![INC-004: SearchFilterHost analysis with the 4688 validation warning](screenshots/inc-004-searchfilter-validated.png)
+
+*The yellow notice shows the validator flagging unsupported or conflicting model claims and presenting a correction based on alert fields.*
+
 ## AI-Assisted Development and My Contribution
 
-This project was developed with AI coding assistance. I set up and operated the VirtualBox lab, deployed Wazuh and connected the Windows agent, generated and investigated Windows events, defined the application requirements, and evaluated the model’s output against Wazuh and Event Viewer evidence. I used OpenAI Codex to assist with the application code and documentation.
+This project was developed with AI coding assistance. I set up and operated the VirtualBox lab, installed and connected the Windows Wazuh agent, generated and investigated Windows events, defined the app requirements, and reviewed the model's output against Wazuh and Event Viewer evidence. AI assistance was used to draft and revise parts of the application code and documentation. I tested the 4688 validation behavior with two captured lab scenarios.
 
 ## Running the App
 
@@ -78,7 +94,7 @@ The test checks that a consistent `mmc.exe` analysis passes and that unsupported
 - AI severity and confidence remain advisory and require human review.
 - Alerts are transferred manually as JSON. There is no Wazuh API integration, continuous polling, automatic blocking, or command execution.
 - The browser stores up to 25 full alerts and their analysis in `localStorage`. Clear the app's history before sharing a browser profile or screenshots.
-- Use sanitized lab data in public reports. Do not publish credentials, private identifiers, or unredacted alert data.
+- The screenshots in this repository are selected lab evidence. Review alert exports and screenshots for credentials and private identifiers before publishing.
 
 ## Project Structure
 
@@ -87,3 +103,4 @@ The test checks that a consistent `mmc.exe` analysis passes and that unsupported
 - `start.bat` — app launcher.
 - `favicon.svg` — app icon.
 - `tests/test-4688-validator.js` — focused regression test for the two 4688 cases.
+- `screenshots/` — selected evidence screenshots grouped by incident.
