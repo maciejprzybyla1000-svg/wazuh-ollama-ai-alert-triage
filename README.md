@@ -11,6 +11,12 @@ A hands-on SOC lab for collecting Windows security events with Wazuh and compari
 - **AI Security Analyst app** — HTML/CSS/JavaScript frontend with a small PowerShell HTTP backend, running on `127.0.0.1:8000`.
 - **Alert transfer** — copy a Wazuh alert as JSON and submit it to the local app; live Wazuh API integration is not implemented.
 
+## Application Preview
+
+![AI Security Analyst app overview](screenshots/app-overview.png)
+
+*The main screen shows the alert input, demonstration scenario selector, and local Ollama status.*
+
 ## Current Detection Scenarios
 
 ### INC-001 — Failed Local Logon
@@ -59,9 +65,11 @@ The model initially attributed the process to the computer account and described
 
 **Status:** Collected; validator regression test passes for both INC-003 and INC-004.
 
-![INC-004: SearchFilterHost analysis with the 4688 validation warning](screenshots/inc-004-searchfilter-validated.png)
+![INC-004: Raw AI analysis before validation](screenshots/inc-004-initial-ai-output.png)
 
-*The yellow notice shows the validator flagging unsupported or conflicting model claims and presenting a correction based on alert fields.*
+![INC-004: Event 4688 process fields](screenshots/inc-004-event-fields.png)
+
+*These enlarged crops make the comparison readable. The raw model output associates the process with a computer account, while the original event shows no target account. It also records token type `%%1936` (type 1) and medium integrity `S-1-16-8192`. The app's validator flags the unsupported claim and replaces the summary; the regression test covers this case.*
 
 ## AI-Assisted Development and My Contribution
 
@@ -86,7 +94,7 @@ Run the 4688 regression test from this project directory with Node.js:
 node .\tests\test-4688-validator.js
 ```
 
-The test checks that a consistent `mmc.exe` analysis passes and that unsupported account/token claims for `SearchFilterHost.exe` are flagged and replaced.
+The test checks that a consistent `mmc.exe` analysis passes and that unsupported account/token claims for `SearchFilterHost.exe` are flagged and replaced. For INC-004, the alert contains no target account, `tokenElevationType` is `%%1936` (type 1), and `mandatoryLabel` is `S-1-16-8192` (medium integrity); the validator prevents the AI summary from claiming a different account or token type.
 
 ## Security Notes and Limitations
 
@@ -103,4 +111,12 @@ The test checks that a consistent `mmc.exe` analysis passes and that unsupported
 - `start.bat` — app launcher.
 - `favicon.svg` — app icon.
 - `tests/test-4688-validator.js` — focused regression test for the two 4688 cases.
-- `screenshots/` — selected evidence screenshots grouped by incident.
+- `screenshots/` — application overview and selected evidence screenshots grouped by incident.
+
+
+
+
+
+
+
+
