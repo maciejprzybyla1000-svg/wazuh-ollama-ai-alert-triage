@@ -128,12 +128,12 @@ function normalizeWazuhDocument(input){
 }
 function value(obj, paths, fallback='Brak danych'){ for(const p of paths){const v=get(obj,p); if(v!==undefined && v!==null && v!=='') return Array.isArray(v)?v.join(', '):String(v)} return fallback; }
 function safeText(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function riskForLevel(level){if(!Number.isFinite(level))return {key:'info',label:'Brak poziomu'};if(level<=3)return {key:'info',label:'Informacyjny'};if(level<=7)return {key:'low',label:'Niski'};if(level<=11)return {key:'medium',label:'Średni'};if(level<=14)return {key:'high',label:'Wysoki'};return {key:'critical',label:'Krytyczny'};}
+function riskForLevel(level){if(!Number.isFinite(level))return {key:'info',label:'Brak poziomu'};if(level<=3)return {key:'info',label:'Informacyjny'};if(level<=6)return {key:'low',label:'Niski'};if(level<=11)return {key:'medium',label:'Średni'};if(level<=14)return {key:'high',label:'Wysoki'};return {key:'critical',label:'Krytyczny'};}
 function renderWazuh(a){
   const raw=get(a,'rule.level'); const level=raw===undefined||raw===null||raw===''?NaN:Number(raw); const risk=riskForLevel(level); const desc=value(a,['rule.description','description'],'Zdarzenie bezpieczeństwa');
   $('wazuh-label').textContent=risk.label; $('wazuh-label').className=risk.key==='info'?'sev-info':`sev-${risk.key}`;
-  $('wazuh-level').textContent=Number.isFinite(level)?`Poziom ${level} / 15`:'Poziom niepodany';
-  $('wazuh-fill').className=`risk-fill fill-${risk.key}`; $('wazuh-fill').style.width=Number.isFinite(level)?`${Math.max(0,Math.min(level,15))/15*100}%`:'0%';
+  $('wazuh-level').textContent=Number.isFinite(level)?`Poziom ${level} / 16`:'Poziom niepodany';
+  $('wazuh-fill').className=`risk-fill fill-${risk.key}`; $('wazuh-fill').style.width=Number.isFinite(level)?`${Math.max(0,Math.min(level,16))/16*100}%`:'0%';
   const facts=[['Host',value(a,['agent.name','host.name','hostname'])],['Czas',value(a,['timestamp','@timestamp'])],['ID reguły',value(a,['rule.id'])],['Grupy',value(a,['rule.groups','rule.group'])]];
   $('wazuh-facts').innerHTML=facts.map(([k,v])=>`<div class="fact"><span>${safeText(k)}</span><strong>${safeText(v)}</strong></div>`).join(''); $('wazuh-description').textContent=desc;
   return {risk,desc,level};
@@ -154,8 +154,8 @@ function renderProcessDetails(alert){
   const tokenLabels={'%%1936':'Typ 1 — pełny token (%%1936)','%%1937':'Typ 2 — podniesiony token (%%1937)','%%1938':'Typ 3 — ograniczony token (%%1938)'};
   const integrity=raw('mandatoryLabel');
   const integrityLabels={'S-1-16-0':'Niezaufany','S-1-16-4096':'Niski','S-1-16-8192':'Średni','S-1-16-8448':'Średni podwyższony','S-1-16-12288':'Wysoki','S-1-16-16384':'Systemowy'};
-  const domain=raw('targetDomainName');const user=raw('targetUserName');
-  const account=user==='Brak w zdarzeniu'?user:(domain==='Brak w zdarzeniu'?user:`${domain}\\${user}`);
+  const domain=raw('targetDomainName');const user=raw('targetUserName');const targetSid=get(alert,'data.win.eventdata.targetUserSid');
+  const account=(!user||user==='-'||user==='Brak w zdarzeniu'||targetSid==='S-1-0-0')?'Brak w zdarzeniu':(domain==='Brak w zdarzeniu'||domain==='-'?user:`${domain}\\${user}`);
   const fields=[['Utworzony proces',raw('newProcessName')],['Proces nadrzędny',raw('parentProcessName')],['Konto procesu',account],['Typ tokenu',tokenLabels[token]||token],['Etykieta integralności',integrity==='Brak w zdarzeniu'?integrity:`${integrityLabels[integrity]||'Nieznana'} (${integrity})`],['Wiersz polecenia',raw('commandLine')]];
   $('process-grid').innerHTML=fields.map(([label,val])=>`<div class="fact"><span>${safeText(label)}</span><strong>${safeText(val)}</strong></div>`).join('');
   panel.style.display='block';
@@ -192,7 +192,7 @@ function validateAnalysis(alert,analysis){
   for(const match of text.matchAll(/\b[A-Za-z0-9_.-]+\.exe\b/gi)){if(!allowedExecutables.includes(match[0].toLowerCase())){issues.push(`AI wymienia niewystępujący w polach procesu ${match[0]}`);break;}}
   const target=e.targetUserName&&e.targetUserName!=='-'&&e.targetUserSid!=='S-1-0-0'?String(e.targetUserName):'';
   const subject=String(e.subjectUserName||'');
-  if(!target&&subject&&text.includes(subject)&&/(konto|użytkownik|user|account)/i.test(text))issues.push('AI przypisuje konto procesu na podstawie subjectUserName, mimo braku konta docelowego');
+  if(!target&&subject&&text.toLowerCase().includes(subject.toLowerCase())&&/(konto|użytkownik|user|account)/i.test(text))issues.push('AI przypisuje konto procesu na podstawie subjectUserName, mimo braku konta docelowego');
   if(target){const claimedAccounts=[...text.matchAll(/(?:konto|account)\s+([A-Za-z0-9_.@$-]+)/gi)].map(m=>m[1].replace(/[.,;:!?]+$/,''));if(claimedAccounts.some(name=>name.toLowerCase()!==target.toLowerCase()&&!String(e.targetDomainName||'').toLowerCase().includes(name.toLowerCase())))issues.push('AI podaje konto inne niż targetUserName');}
   if((analysis.checks||[]).length!==2)issues.push('AI zwróciła inną liczbę niż 2 kontrolki wymagane dla 4688');
   const idText=`${analysis.summary||''} ${(analysis.checks||[]).join(' ')}`;

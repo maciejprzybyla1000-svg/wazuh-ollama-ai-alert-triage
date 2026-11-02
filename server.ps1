@@ -38,6 +38,9 @@ try {
           Send-Json $context 200 @{ ok=$true; model=$model; model_available=$found; models=$models }
         } catch { Send-Json $context 200 @{ ok=$false; model=$model; model_available=$false; models=@() } }
       } elseif ($context.Request.HttpMethod -eq 'POST' -and $path -eq '/api/analyze') {
+        $origin = $context.Request.Headers['Origin']
+        if ($origin -and $origin -ne 'http://127.0.0.1:8000') { Send-Json $context 403 @{ error='Requests from other origins are not allowed.' }; continue }
+        if ($context.Request.ContentType -notmatch '^application/json(?:\s*;|$)') { Send-Json $context 415 @{ error='Content-Type must be application/json.' }; continue }
         if ($context.Request.ContentLength64 -le 0 -or $context.Request.ContentLength64 -gt 65536) { Send-Json $context 413 @{ error='Alert empty or larger than 64 KB.' }; continue }
         $reader = [System.IO.StreamReader]::new($context.Request.InputStream,[System.Text.Encoding]::UTF8)
         $alert = $reader.ReadToEnd() | ConvertFrom-Json

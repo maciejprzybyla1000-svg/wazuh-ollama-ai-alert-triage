@@ -10,6 +10,7 @@ A hands-on SOC lab for collecting Windows security events with Wazuh and compari
 - **Ollama with Llama 3.2** — local model used for alert summaries and triage suggestions.
 - **AI Security Analyst app** — HTML/CSS/JavaScript frontend with a small PowerShell HTTP backend, running on `127.0.0.1:8000`.
 - **Alert transfer** — copy a Wazuh alert as JSON and submit it to the local app; live Wazuh API integration is not implemented.
+- The app presents Wazuh's numeric rule level with its own display categories; the original Wazuh level remains visible as the source value.
 
 ## Application Preview
 
@@ -55,7 +56,7 @@ The event was consistent with opening a Windows management console in the lab. T
 
 ![INC-003: Event 4688 process details for mmc.exe](screenshots/inc-003-mmc-elevated-process.png)
 
-*The captured fields show `mmc.exe`, its parent process, token type 2, high integrity, and an empty command line. The local account name is redacted.*
+*The captured fields show `mmc.exe`, its parent process, token type 2, high integrity, and an empty command line. The local account value is redacted.*
 
 ### INC-004 — Windows Search Process and AI Claim Validation
 
@@ -69,7 +70,7 @@ The model initially attributed the process to the computer account and described
 
 ![INC-004: Event 4688 process fields](screenshots/inc-004-event-fields.png)
 
-*These enlarged crops make the comparison readable. The raw model output associates the process with a computer account, while the original event shows no target account. It also records token type `%%1936` (type 1) and medium integrity `S-1-16-8192`. The app's validator flags the unsupported claim and replaces the summary; the regression test covers this case.*
+*These enlarged, anonymized crops make the comparison readable. The raw model output associates the process with a computer account, while the original event shows no target account. It also records token type `%%1936` (type 1) and medium integrity `S-1-16-8192`. The app's validator flags the unsupported claim and replaces the summary; the regression test covers this case.*
 
 ## AI-Assisted Development and My Contribution
 
@@ -103,6 +104,7 @@ The test checks that a consistent `mmc.exe` analysis passes and that unsupported
 - Alerts are transferred manually as JSON. There is no Wazuh API integration, continuous polling, automatic blocking, or command execution.
 - The browser stores up to 25 full alerts and their analysis in `localStorage`. Clear the app's history before sharing a browser profile or screenshots.
 - The screenshots in this repository are selected lab evidence. Review alert exports and screenshots for credentials and private identifiers before publishing.
+- The Windows 10 VM is an isolated legacy lab endpoint. Standard Windows 10 support ended on October 14, 2025; do not use this VM as a general-purpose internet-connected system ([Microsoft lifecycle FAQ](https://learn.microsoft.com/en-us/lifecycle/faq/windows)).
 
 ## Project Structure
 
@@ -112,6 +114,7 @@ The test checks that a consistent `mmc.exe` analysis passes and that unsupported
 - `favicon.svg` — app icon.
 - `tests/test-4688-validator.js` — focused regression test for the two 4688 cases.
 - `screenshots/` — application overview and selected evidence screenshots grouped by incident.
+
 
 
 
