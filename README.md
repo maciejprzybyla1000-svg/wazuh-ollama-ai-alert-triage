@@ -2,6 +2,8 @@
 
 A hands-on SOC lab for collecting Windows security events with Wazuh and comparing Wazuh rule severity with a local AI analyst powered by Ollama. The project explores how an LLM can help explain alerts, where its interpretation can be wrong, and how selected claims can be checked against the original event fields.
 
+This lab demonstrates my practical use of Wazuh and a local LLM (Ollama) to triage Windows security alerts, validate AI-generated claims against event evidence, and keep a human analyst in the loop.
+
 ## Lab Architecture
 
 - **Wazuh Manager 4.14.9** — deployed from the official virtual appliance in VirtualBox.
@@ -47,7 +49,7 @@ The model initially attributed the process to the computer account and described
 
 ## AI-Assisted Development and My Contribution
 
-This project was developed with AI coding assistance. I set up and operated the VirtualBox lab, installed and connected the Windows Wazuh agent, generated and investigated Windows events, defined the app requirements, and reviewed the model's output against Wazuh and Event Viewer evidence. AI assistance was used to draft and revise parts of the application code and documentation. I tested the 4688 validation behavior with two captured lab scenarios.
+This project was developed with AI coding assistance. I set up and operated the VirtualBox lab, deployed Wazuh and connected the Windows agent, generated and investigated Windows events, defined the application requirements, and evaluated the model’s output against Wazuh and Event Viewer evidence. I used OpenAI Codex to assist with the application code and documentation.
 
 ## Running the App
 
