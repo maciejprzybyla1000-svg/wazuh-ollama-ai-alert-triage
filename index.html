@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iOCIgeTE9IjYiIHgyPSI1NiIgeTI9IjU4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMxYjM4NTEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGIxMDIwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxNyIgZmlsbD0idXJsKCNiZykiLz4KICA8cGF0aCBkPSJNMzIgOCA1MiAxNXYxM2MwIDEzLjItOC4zIDIyLjItMjAgMjktMTEuNy02LjgtMjAtMTUuOC0yMC0yOVYxNUwzMiA4WiIgc3Ryb2tlPSIjNzRkZmIwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNMjIgMjVoOGw1LTZtLTUgNiA2IDhtLTE0IDhoMTBsNS04bTAgMGg3IiBzdHJva2U9IiNhN2M5ZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPGNpcmNsZSBjeD0iMjIiIGN5PSIyNSIgcj0iMy41IiBmaWxsPSIjNzRkZmIwIi8+CiAgPGNpcmNsZSBjeD0iMzUiIGN5PSIxOSIgcj0iMy41IiBmaWxsPSIjNzRkZmIwIi8+CiAgPGNpcmNsZSBjeD0iNDIiIGN5PSIzMyIgcj0iMy41IiBmaWxsPSIjNzRkZmIwIi8+CiAgPGNpcmNsZSBjeD0iMjIiIGN5PSI0MSIgcj0iMy41IiBmaWxsPSIjNzRkZmIwIi8+Cjwvc3ZnPgo=">
+  <title>AI Security Analyst — laboratorium</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1020; --panel:#121a2d; --line:#26334d; --muted:#97a6c2; --text:#edf3ff; --blue:#76a9ff; --green:#74dfb0; --amber:#ffd27a; }
+    * { box-sizing:border-box } body { margin:0; background:radial-gradient(ellipse at 20% 0%,#182849 0,transparent 43%),radial-gradient(ellipse at 100% 18%,#102a3a 0,transparent 30%),var(--bg); color:var(--text); font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif }
+    main { width:min(1100px,calc(100% - 32px)); margin:34px auto 64px } header.hero { position:relative;overflow:hidden;margin-bottom:24px;padding:23px 25px 24px;border:1px solid #314663;border-radius:20px;background:linear-gradient(115deg,#172641 0%,#111b2d 58%,#102730 100%);box-shadow:0 18px 48px #0003 } header.hero::after { content:"";position:absolute;width:270px;height:270px;right:-105px;top:-155px;border:1px solid #74dfb022;border-radius:50%;box-shadow:0 0 0 28px #74dfb008,0 0 0 58px #74dfb006;pointer-events:none } .eyebrow { display:inline-flex;align-items:center;gap:8px;color:var(--green);text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:750;padding:7px 10px;border:1px solid #74dfb033;border-radius:999px;background:#74dfb00b }
+    .brand-lockup { display:flex;align-items:center;gap:15px;margin:15px 0 10px;position:relative;z-index:1 } .brand-icon { width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border:1px solid #74dfb066;border-radius:18px;background:linear-gradient(145deg,#1b3851,#101a2c);box-shadow:0 8px 28px #0005,0 0 26px #74dfb018 } .brand-icon svg { width:40px;height:40px;filter:drop-shadow(0 0 7px #74dfb044) }
+    h1 { margin:0;font-size:clamp(28px,5vw,42px);line-height:1.1;letter-spacing:-.035em } .intro { margin:0;color:var(--muted);max-width:760px;line-height:1.7 }
+    .layout { display:grid; grid-template-columns:1fr; gap:18px; align-items:start } .card { background:linear-gradient(180deg,#151f35,#11192b); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 18px 45px #0002 }
+    h2 { font-size:17px; margin:0 0 14px } h3 {font-size:15px;margin:0} label { display:block; font-size:13px; color:#c7d3e8; margin-bottom:8px } textarea { width:100%; min-height:230px; resize:vertical; background:#0b1222; border:1px solid #33415d; border-radius:10px; color:#dce8ff; padding:14px; font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace; outline:none }
+    textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px #76a9ff22 } .actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap } button { border:0; border-radius:9px; padding:11px 16px; cursor:pointer; font-weight:700; color:#071326; background:var(--blue) } button.secondary { color:var(--text); background:#25324a; border:1px solid #3b4b69 } button:hover { filter:brightness(1.1) }
+    .hint { color:var(--muted); font-size:12px; margin:12px 0 0 } #empty { color:var(--muted); padding:24px 2px } #results { display:none } .results-grid {display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch} .result-card {min-width:0} .result-head {display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px} .badge { display:inline-flex; padding:5px 10px; border-radius:20px; font-size:12px; font-weight:750; background:#25324a; color:var(--text) } .summary { font-size:17px; margin:12px 0 16px }
+    button:focus-visible,select:focus-visible { outline:2px solid var(--green);outline-offset:3px } button:disabled { opacity:.6;cursor:wait } ::selection { background:#74dfb044;color:#fff }
+    .risk-panel {background:#0c1425;border:1px solid #202d44;border-radius:12px;padding:14px;margin:12px 0 16px}.risk-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.risk-top strong{font-size:16px}.risk-value{font-size:12px;color:var(--muted)}.risk-track{height:10px;border-radius:8px;background:#27334a;overflow:hidden;margin:12px 0 9px}.risk-fill{height:100%;width:0;transition:width .35s ease;border-radius:8px}.risk-labels{display:grid;grid-template-columns:repeat(5,1fr);font-size:10px;color:var(--muted);text-align:center}.sev-info{color:#9cc9ff!important}.sev-low{color:#74dfb0!important}.sev-medium{color:#ffd27a!important}.sev-high{color:#ff9b59!important}.sev-critical{color:#ff707c!important}.fill-info{background:#5798e5}.fill-low{background:#43c88b}.fill-medium{background:#e7b647}.fill-high{background:#fa8845}.fill-critical{background:#f04e62}.ai-severity{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:750}.dot{width:10px;height:10px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor}
+    .facts { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:14px 0 18px } .fact { background:#0c1425; border:1px solid #202d44; border-radius:10px; padding:10px 12px; min-width:0 } .fact span { display:block; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.08em } .fact strong { display:block; margin-top:3px; overflow-wrap:anywhere; font-size:13px }
+    .results-grid>.result-card:first-child { border-top:2px solid #5798e5 } .results-grid>.result-card:nth-child(2) { border-top:2px solid var(--green) } .process-details { display:none; grid-column:1/-1; margin-top:0;border-top:2px solid #a78bfa } .process-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px } .process-note { color:var(--muted);font-size:12px;margin:12px 0 0 }
+    .history-card { margin-top:18px } .history-list { display:grid; gap:9px } .history-item { width:100%; text-align:left; color:var(--text); background:#0c1425; border:1px solid #26334d; padding:12px 14px; border-radius:10px; font-weight:400 } .history-item:hover { border-color:var(--blue) } .history-item-top { display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap } .history-meta { color:var(--muted); font-size:12px } .history-summary { display:block; color:#dce8ff; margin-top:5px; font-size:13px; overflow-wrap:anywhere } .history-empty { color:var(--muted); margin:0; font-size:13px }
+    ul { margin:8px 0 0; padding-left:19px } li { margin:7px 0 } .section-title { color:#c7d3e8; font-size:13px; font-weight:700; margin:17px 0 5px } .warning { display:none; border:1px solid #795a27; background:#2b2316; color:#ffe2a6; padding:12px; border-radius:10px; font-size:13px; margin-top:14px }
+    #alert-facts code { color:#cfe1ff; font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; overflow-wrap:anywhere }
+    .error { display:none; color:#ffaaa8; font-size:13px; margin-top:12px } footer { color:#7584a0; font-size:12px; margin-top:18px }
+    button { background:linear-gradient(135deg,#8db7ff,#6d9ff3);box-shadow:0 5px 18px #5798e522 } button.secondary { background:linear-gradient(135deg,#263751,#1d2a40);box-shadow:none }
+    @media(max-width:780px) { main{margin-top:20px}header.hero{padding:19px 17px 20px}.layout,.results-grid{grid-template-columns:1fr}.brand-icon{width:50px;height:50px;flex-basis:50px}.brand-icon svg{width:34px;height:34px}textarea{min-height:220px} }
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero"><div class="eyebrow"><span aria-hidden="true">●</span> Projekt portfolio · laboratorium SOC</div><div class="brand-lockup"><div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 5 53 13v15c0 14-8.8 23.4-21 31C19.8 51.4 11 42 11 28V13L32 5Z" stroke="#74dfb0" stroke-width="3"/><path d="M22 24h8l5-6m-5 6 6 8m-14 8h10l5-8m0 0h7" stroke="#a7c9ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="24" r="3.5" fill="#74dfb0"/><circle cx="35" cy="18" r="3.5" fill="#74dfb0"/><circle cx="42" cy="32" r="3.5" fill="#74dfb0"/><circle cx="22" cy="40" r="3.5" fill="#74dfb0"/></svg></div><h1>AI Security Analyst</h1></div><p class="intro">Wklej alert JSON, aby zobaczyć obok siebie poziom reguły Wazuh i niezależną analizę AI: podsumowanie, dowody, ocenę powagi i dalsze kroki do sprawdzenia.</p></header>
+  <div class="layout">
+    <section class="card">
+      <h2>Alert do analizy</h2>
+      <label for="alert">Dane alertu w formacie JSON</label>
+      <textarea id="alert" spellcheck="false" aria-label="Dane alertu JSON"></textarea>
+      <div class="actions"><button id="analyze">Analizuj alert</button><button class="secondary" id="sample">Wczytaj przykład</button></div>
+      <label for="sample-picker" style="margin-top:14px">Albo wybierz inny alert demonstracyjny</label>
+      <select id="sample-picker" style="width:100%;background:#0b1222;border:1px solid #33415d;border-radius:9px;color:#dce8ff;padding:10px;font:inherit">
+        <option value="failed-logins">Wiele nieudanych logowań</option>
+        <option value="file-change">Zmiana ważnego pliku</option>
+        <option value="new-account">Utworzenie nowego konta</option>
+        <option value="suspicious-process">Nietypowy proces</option>
+      </select>
+      <p class="hint">Tryb AI używa lokalnego modelu Ollama. Jeśli model nie jest uruchomiony, pokażę analizę demonstracyjną.</p>
+      <p id="error" class="error" role="alert"></p>
+    </section>
+    <div><div id="ai-status" class="hint" style="margin:0 0 12px">Sprawdzam połączenie z lokalnym AI…</div><div id="empty">Wczytaj przykład lub wklej własny alert, a potem wybierz „Analizuj alert”.</div>
+      <div id="results" class="results-grid" aria-live="polite">
+        <section class="card result-card"><div class="result-head"><h2>Ocena Wazuh</h2><span class="badge">Dane alertu</span></div><div class="risk-panel"><div class="risk-top"><strong id="wazuh-label">—</strong><span id="wazuh-level" class="risk-value"></span></div><div class="risk-track"><div id="wazuh-fill" class="risk-fill"></div></div><div class="risk-labels"><span>Info</span><span>Niski</span><span>Średni</span><span>Wysoki</span><span>Krytyczny</span></div></div><div class="facts" id="wazuh-facts"></div><div class="section-title">Opis reguły Wazuh</div><p id="wazuh-description" class="summary"></p><p class="hint">Poziom Wazuh pochodzi z reguły alertu (0–15); aplikacja mapuje go na czytelną kategorię.</p></section>
+        <section class="card result-card"><div class="result-head"><h2>Analiza AI</h2><span id="ai-risk" class="ai-severity"><i class="dot"></i><span id="ai-risk-label">Oczekuje na analizę</span></span></div><p id="ai-summary" class="summary"></p><div class="facts" id="ai-facts"></div><div class="section-title">Fakty z alertu</div><ul id="alert-facts"></ul><div class="section-title">Co warto sprawdzić</div><ul id="checks"></ul><div class="warning" id="validation-warning"></div><div class="warning" id="injection"></div></section>
+        <section class="card process-details" id="process-details"><h2>Szczegóły procesu — Windows 4688</h2><div class="process-grid" id="process-grid"></div><p class="process-note">Pola pochodzą bezpośrednio z alertu Wazuh. Puste pole oznacza, że zdarzenie nie dostarczyło tej informacji.</p></section>
+      </div>
+    </div>
+  </div>
+  <section class="card history-card" aria-labelledby="history-title"><div class="result-head"><h2 id="history-title">Historia analiz</h2><button class="secondary" id="clear-history" type="button">Wyczyść historię</button></div><div id="history-list" class="history-list"></div><p class="hint">Historia jest przechowywana lokalnie w tej przeglądarce (maksymalnie 25 wpisów).</p></section>
+  <footer>Alert jest przekazywany do lokalnego Ollama na tym komputerze. Gdy model jest niedostępny, aplikacja pokazuje analizę demonstracyjną. Wynik AI wymaga weryfikacji przez człowieka.</footer>
+</main>
+<script>
+const samples = {
+  'failed-logins': {
+  "timestamp":"2026-11-02T10:15:00Z",
+  "agent":{"name":"win10-lab","id":"001"},
+  "rule":{"id":"60122","level":8,"description":"Multiple failed login attempts","groups":["authentication_failures"]},
+  "data":{"source_ip":"192.0.2.25","attempts":6,"user":"lab-user"},
+  "full_log":"Six failed logon attempts for the lab-user account."
+  },
+  'file-change': {
+    "timestamp":"2026-11-02T11:04:22Z",
+    "agent":{"name":"win10-lab","id":"001"},
+    "rule":{"id":"550","level":7,"description":"Integrity checksum changed","groups":["syscheck"]},
+    "syscheck":{"path":"C:\\Lab\\Config\\app-settings.ini","event":"modified","md5_after":"9a6f1d3b-test"},
+    "full_log":"File integrity monitoring detected a change to a lab configuration file."
+  },
+  'new-account': {
+    "timestamp":"2026-11-02T12:31:05Z",
+    "agent":{"name":"win10-lab","id":"001"},
+    "rule":{"id":"60109","level":5,"description":"New account added to the system","groups":["account_changed"]},
+    "data":{"user":"temp-lab","source_user":"lab-admin","action":"account_created"},
+    "full_log":"A local test account named temp-lab was created."
+  },
+  'suspicious-process': {
+    "timestamp":"2026-11-02T13:08:49Z",
+    "agent":{"name":"win10-lab","id":"001"},
+    "rule":{"id":"92052","level":9,"description":"Unusual PowerShell process started","groups":["process_activity"]},
+    "data":{"parent_process":"explorer.exe","process":"powershell.exe","user":"lab-user","command_line":"powershell.exe -NoProfile -Command \"Get-Process\""},
+    "full_log":"A PowerShell process ran a harmless process-listing command in the lab."
+  }
+};
+const $ = (id) => document.getElementById(id);
+const pretty = (obj) => JSON.stringify(obj,null,2);
+const HISTORY_KEY='aiSecurityAnalyst.history.v1';
+function readHistory(){try{const h=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');return Array.isArray(h)?h:[]}catch{return []}}
+function renderHistory(){
+  const history=readHistory();const list=$('history-list');
+  if(!history.length){list.innerHTML='<p class="history-empty">Nie ma jeszcze zapisanych analiz.</p>';return;}
+  list.innerHTML=history.map(entry=>{const level=entry.alert?.rule?.level;const rule=entry.alert?.rule?.id||'brak ID';const host=entry.alert?.agent?.name||'nieznany host';const aiLabel={low:'Niskie',medium:'Średnie',high:'Wysokie',critical:'Krytyczne'}[String(entry.analysis?.severity||'').toLowerCase()]||'Nieznane';const summary=String(entry.analysis?.summary||'').replace(/\s+/g,' ').slice(0,220);return `<button type="button" class="history-item" data-history-id="${safeText(entry.id)}"><span class="history-item-top"><strong>${safeText(host)} · reguła ${safeText(rule)} · Wazuh ${safeText(level===undefined?'—':level)} / AI ${safeText(aiLabel)}</strong><span class="history-meta">${safeText(new Date(entry.savedAt).toLocaleString('pl-PL'))} · ${safeText(entry.mode==='demo'?'demo':'Ollama')}</span></span><span class="history-summary">${safeText(summary)}</span></button>`}).join('');
+  list.querySelectorAll('[data-history-id]').forEach(button=>button.addEventListener('click',()=>openHistory(button.dataset.historyId)));
+}
+function saveHistory(alert,analysis,model,mode){
+  try{const history=readHistory();history.unshift({id:`${Date.now()}-${Math.random().toString(36).slice(2,8)}`,savedAt:new Date().toISOString(),alert,analysis,model,mode});localStorage.setItem(HISTORY_KEY,JSON.stringify(history.slice(0,25)));renderHistory();}catch(e){console.warn('Nie udało się zapisać historii w przeglądarce.',e);}
+}
+function openHistory(id){
+  const entry=readHistory().find(item=>item.id===id);if(!entry)return;
+  $('alert').value=pretty(entry.alert);renderWazuh(entry.alert);renderProcessDetails(entry.alert);renderAI(entry.analysis,entry.model,entry.alert);
+  $('empty').style.display='none';$('results').style.display='grid';$('ai-status').textContent=entry.mode==='demo'?'Wczytano zapisaną analizę demonstracyjną — model nie został uruchomiony ponownie.':'Wczytano zapisaną analizę Ollama — model nie został uruchomiony ponownie.';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function get(obj,path){ return path.split('.').reduce((v,k)=>v == null ? undefined : v[k],obj); }
+function setPath(obj,path,val){const keys=path.split('.').filter(k=>k&&k!=='__proto__'&&k!=='constructor'&&k!=='prototype');if(!keys.length)return;let at=obj;for(let i=0;i<keys.length-1;i++){if(!at[keys[i]]||typeof at[keys[i]]!=='object')at[keys[i]]={};at=at[keys[i]];}at[keys[keys.length-1]]=val;}
+function normalizeWazuhDocument(input){
+  let doc=input;
+  for(let i=0;i<4;i++){
+    if(doc&&doc._source&&typeof doc._source==='object'){doc=doc._source;continue;}
+    if(doc&&doc.hits&&Array.isArray(doc.hits.hits)&&doc.hits.hits.length){doc=doc.hits.hits[0];continue;}
+    if(doc&&doc.source&&typeof doc.source==='object'&&(doc.source.agent||doc.source.rule||doc.source.data)){doc=doc.source;continue;}
+    if(doc&&doc.data&&Array.isArray(doc.data.affected_items)&&doc.data.affected_items.length){doc=doc.data.affected_items[0];continue;}
+    break;
+  }
+  if(doc&&doc.fields&&typeof doc.fields==='object'&&!doc.agent&&!doc.rule){
+    const expanded={};
+    for(const [path,raw] of Object.entries(doc.fields)){const val=Array.isArray(raw)?(raw.length===1?raw[0]:raw):raw;setPath(expanded,path,val);}
+    doc=expanded;
+  }
+  return doc&&typeof doc==='object'?doc:input;
+}
+function value(obj, paths, fallback='Brak danych'){ for(const p of paths){const v=get(obj,p); if(v!==undefined && v!==null && v!=='') return Array.isArray(v)?v.join(', '):String(v)} return fallback; }
+function safeText(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function riskForLevel(level){if(!Number.isFinite(level))return {key:'info',label:'Brak poziomu'};if(level<=3)return {key:'info',label:'Informacyjny'};if(level<=7)return {key:'low',label:'Niski'};if(level<=11)return {key:'medium',label:'Średni'};if(level<=14)return {key:'high',label:'Wysoki'};return {key:'critical',label:'Krytyczny'};}
+function renderWazuh(a){
+  const raw=get(a,'rule.level'); const level=raw===undefined||raw===null||raw===''?NaN:Number(raw); const risk=riskForLevel(level); const desc=value(a,['rule.description','description'],'Zdarzenie bezpieczeństwa');
+  $('wazuh-label').textContent=risk.label; $('wazuh-label').className=risk.key==='info'?'sev-info':`sev-${risk.key}`;
+  $('wazuh-level').textContent=Number.isFinite(level)?`Poziom ${level} / 15`:'Poziom niepodany';
+  $('wazuh-fill').className=`risk-fill fill-${risk.key}`; $('wazuh-fill').style.width=Number.isFinite(level)?`${Math.max(0,Math.min(level,15))/15*100}%`:'0%';
+  const facts=[['Host',value(a,['agent.name','host.name','hostname'])],['Czas',value(a,['timestamp','@timestamp'])],['ID reguły',value(a,['rule.id'])],['Grupy',value(a,['rule.groups','rule.group'])]];
+  $('wazuh-facts').innerHTML=facts.map(([k,v])=>`<div class="fact"><span>${safeText(k)}</span><strong>${safeText(v)}</strong></div>`).join(''); $('wazuh-description').textContent=desc;
+  return {risk,desc,level};
+}
+function extractAlertFacts(alert){
+  const paths=['timestamp','@timestamp','agent.name','agent.id','agent.ip','host.name','rule.id','rule.level','rule.description','rule.groups','data.source_ip','data.srcip','data.attempts','data.count','data.user','data.srcuser','data.process','data.command_line','data.win.system.channel','data.win.system.computer','data.win.system.eventID','data.win.system.eventSourceName','data.win.system.severityValue','data.win.system.message','data.win.eventdata.targetUserName','data.win.eventdata.subjectUserName','data.win.eventdata.logonProcessName','data.win.eventdata.authenticationPackageName','data.win.eventdata.ipAddress','data.win.eventdata.processName','data.win.eventdata.commandLine','syscheck.path','syscheck.event','full_log','message'];
+  const facts=[];
+  for(const path of paths){const v=get(alert,path); if(v===undefined||v===null||v==='')continue; let shown=Array.isArray(v)?v.join(', '):typeof v==='object'?JSON.stringify(v):String(v); if(shown.length>240)shown=shown.slice(0,237)+'...'; facts.push(`${path} = ${shown}`);}
+  return facts.length?facts:['W alercie nie znaleziono typowych pól do pokazania.'];
+}
+function renderProcessDetails(alert){
+  const eventId=String(value(alert,['data.win.system.eventID','win.system.eventID'],'')).trim();
+  const panel=$('process-details');
+  if(eventId!=='4688'){panel.style.display='none';$('process-grid').innerHTML='';return;}
+  const event='data.win.eventdata.';
+  const raw=(name)=>{const v=get(alert,event+name);return v===undefined||v===null||v===''?'Brak w zdarzeniu':String(v);};
+  const token=raw('tokenElevationType');
+  const tokenLabels={'%%1936':'Typ 1 — pełny token (%%1936)','%%1937':'Typ 2 — podniesiony token (%%1937)','%%1938':'Typ 3 — ograniczony token (%%1938)'};
+  const integrity=raw('mandatoryLabel');
+  const integrityLabels={'S-1-16-0':'Niezaufany','S-1-16-4096':'Niski','S-1-16-8192':'Średni','S-1-16-8448':'Średni podwyższony','S-1-16-12288':'Wysoki','S-1-16-16384':'Systemowy'};
+  const domain=raw('targetDomainName');const user=raw('targetUserName');
+  const account=user==='Brak w zdarzeniu'?user:(domain==='Brak w zdarzeniu'?user:`${domain}\\${user}`);
+  const fields=[['Utworzony proces',raw('newProcessName')],['Proces nadrzędny',raw('parentProcessName')],['Konto procesu',account],['Typ tokenu',tokenLabels[token]||token],['Etykieta integralności',integrity==='Brak w zdarzeniu'?integrity:`${integrityLabels[integrity]||'Nieznana'} (${integrity})`],['Wiersz polecenia',raw('commandLine')]];
+  $('process-grid').innerHTML=fields.map(([label,val])=>`<div class="fact"><span>${safeText(label)}</span><strong>${safeText(val)}</strong></div>`).join('');
+  panel.style.display='block';
+}
+function deterministic4688(alert){
+  const e=get(alert,'data.win.eventdata')||{};
+  const base=(path)=>String(path||'').replace(/\\/g,'/').split('/').pop();
+  const process=e.newProcessName||'';const parent=e.parentProcessName||'';
+  const tokenMap={'%%1936':'Typ 1 — pełny token','%%1937':'Typ 2 — podniesiony token','%%1938':'Typ 3 — ograniczony token'};
+  const integrityMap={'S-1-16-0':'niezaufany','S-1-16-4096':'niski','S-1-16-8192':'średni','S-1-16-8448':'średni podwyższony','S-1-16-12288':'wysoki','S-1-16-16384':'systemowy'};
+  const token=tokenMap[e.tokenElevationType]||'';const integrity=integrityMap[e.mandatoryLabel]||'';
+  const target=e.targetUserName&&e.targetUserName!=='-'&&e.targetUserSid!=='S-1-0-0'?`${e.targetDomainName&&e.targetDomainName!=='-'?e.targetDomainName+'\\':''}${e.targetUserName}`:'';
+  const accountText=target?` dla konta ${target}`:'; konto docelowe nie zostało podane';
+  let sentence1=`Zdarzenie Windows 4688 zarejestrowało utworzenie procesu ${process||'(nazwa procesu niepodana)'} przez ${parent||'(proces nadrzędny niepodany)'}${accountText}.`;
+  const evidence=[];if(token)evidence.push(`token ${e.tokenElevationType} oznacza ${token.toLowerCase()}`);if(integrity)evidence.push(`etykieta ${e.mandatoryLabel} oznacza ${integrity} poziom integralności`);
+  const command=e.commandLine&&String(e.commandLine).trim()?`Wiersz polecenia: ${e.commandLine}.`:'Wiersza polecenia nie zapisano, więc dokładnego polecenia ani celu uruchomienia nie można ustalić z tego alertu.';
+  const evidenceText=evidence.join('; ');const sentence2=(evidence.length?`${evidenceText.charAt(0).toUpperCase()}${evidenceText.slice(1)}. `:'')+command;
+  const time=value(alert,['timestamp','@timestamp'],'czas niepodany');
+  const checks=[`Zweryfikuj, czy uruchomienie ${base(process)||'tego procesu'} przez ${base(parent)||'proces nadrzędny'} było oczekiwane około ${time}.`];
+  if(e.newProcessId&&e.processId)checks.push(`Skoreluj PID nowego procesu ${e.newProcessId} i PID procesu tworzącego ${e.processId} z sąsiednimi zdarzeniami 4688.`);
+  else if(process)checks.push(`Sprawdź podpis cyfrowy pliku ${process} i potwierdź, że znajduje się w oczekiwanej lokalizacji.`);
+  else checks.push('Sprawdź powiązane zdarzenia 4688 z tego samego hosta i czasu.');
+  return {summary:`${sentence1} ${sentence2}`,checks};
+}
+function validateAnalysis(alert,analysis){
+  const eventId=String(get(alert,'data.win.system.eventID')||'');
+  if(eventId!=='4688')return {analysis,warnings:[]};
+  const e=get(alert,'data.win.eventdata')||{};const text=`${analysis.summary||''} ${(analysis.checks||[]).join(' ')}`;
+  const issues=[];const tokenTypes={'%%1936':'1','%%1937':'2','%%1938':'3'};const expectedType=tokenTypes[e.tokenElevationType];
+  if(expectedType){const re=/(?:token\s+(?:elevation\s+)?type|typ(?:u)?\s+(?:podniesienia\s+uprawnień\s+)?tokenu?)\s*[:=]?\s*([123])\b/gi;for(const m of text.matchAll(re)){if(m[1]!==expectedType){issues.push(`typ tokenu w AI (${m[1]}) nie zgadza się z ${e.tokenElevationType}`);break;}}}
+  const integrityTerms={'S-1-16-0':['untrusted','niezaufan'],'S-1-16-4096':['low integrity','niski poziom integralności'],'S-1-16-8192':['medium integrity','średni poziom integralności'],'S-1-16-8448':['medium-plus','średni podwyższony'],'S-1-16-12288':['high integrity','wysoki poziom integralności'],'S-1-16-16384':['system integrity','systemowy poziom integralności']};
+  const expectedIntegrity=e.mandatoryLabel;for(const [sid,terms] of Object.entries(integrityTerms)){if(sid!==expectedIntegrity&&terms.some(term=>text.toLowerCase().includes(term))){issues.push(`opis poziomu integralności w AI nie zgadza się z ${expectedIntegrity||'brakiem pola'}`);break;}}
+  const allowedExecutables=[e.newProcessName,e.parentProcessName].filter(Boolean).map(p=>p.replace(/\\/g,'/').split('/').pop().toLowerCase());
+  for(const match of text.matchAll(/\b[A-Za-z0-9_.-]+\.exe\b/gi)){if(!allowedExecutables.includes(match[0].toLowerCase())){issues.push(`AI wymienia niewystępujący w polach procesu ${match[0]}`);break;}}
+  const target=e.targetUserName&&e.targetUserName!=='-'&&e.targetUserSid!=='S-1-0-0'?String(e.targetUserName):'';
+  const subject=String(e.subjectUserName||'');
+  if(!target&&subject&&text.includes(subject)&&/(konto|użytkownik|user|account)/i.test(text))issues.push('AI przypisuje konto procesu na podstawie subjectUserName, mimo braku konta docelowego');
+  if(target){const claimedAccounts=[...text.matchAll(/(?:konto|account)\s+([A-Za-z0-9_.@$-]+)/gi)].map(m=>m[1].replace(/[.,;:!?]+$/,''));if(claimedAccounts.some(name=>name.toLowerCase()!==target.toLowerCase()&&!String(e.targetDomainName||'').toLowerCase().includes(name.toLowerCase())))issues.push('AI podaje konto inne niż targetUserName');}
+  if((analysis.checks||[]).length!==2)issues.push('AI zwróciła inną liczbę niż 2 kontrolki wymagane dla 4688');
+  const idText=`${analysis.summary||''} ${(analysis.checks||[]).join(' ')}`;
+  const thread=String(get(alert,'data.win.system.threadID')||'');
+  if(thread&&new RegExp(`(?:pid|id procesu|process id)\\s*(?:[:=]|o)?\\s*${thread}\\b`,'i').test(idText)&&!String(e.newProcessId||'').toLowerCase().includes(thread.toLowerCase())&&!String(e.processId||'').toLowerCase().includes(thread.toLowerCase()))issues.push('AI myli threadID z identyfikatorem procesu');
+  if(!issues.length)return {analysis,warnings:[]};
+  const grounded=deterministic4688(alert);
+  return {analysis:{...analysis,summary:grounded.summary,checks:grounded.checks},warnings:issues};
+}
+function renderAI(analysis,modelName,alertObj){
+  const validation=validateAnalysis(alertObj||{},analysis);analysis=validation.analysis;
+  const key=['low','medium','high','critical'].includes(String(analysis.severity).toLowerCase())?String(analysis.severity).toLowerCase():'medium';
+  const labels={low:'Niskie',medium:'Średnie',high:'Wysokie',critical:'Krytyczne'};
+  $('ai-risk').className=`ai-severity sev-${key}`; $('ai-risk-label').textContent=labels[key];
+  $('ai-summary').textContent=analysis.summary||'Brak podsumowania.';
+  $('ai-facts').innerHTML=`<div class="fact"><span>Pewność oceny</span><strong>${safeText(analysis.confidence||'Niepodana')}</strong></div><div class="fact"><span>Źródło</span><strong>${safeText(modelName||'Tryb demonstracyjny')}</strong></div>`;
+  $('alert-facts').innerHTML=extractAlertFacts(alertObj||{}).map(x=>`<li><code>${safeText(x)}</code></li>`).join('');
+  $('checks').innerHTML=(analysis.checks||[]).map(x=>`<li>${safeText(x)}</li>`).join('');
+  const warning=$('validation-warning');if(validation.warnings.length){warning.textContent=`Kontrola jakości wykryła niespójność w odpowiedzi AI: ${validation.warnings.join('; ')}. Podsumowanie i kroki sprawdzenia zastąpiono wersją opartą bezpośrednio na polach alertu; ocena powagi nadal pochodzi z AI.`;warning.style.display='block';}else{warning.textContent='';warning.style.display='none';}
+}
+function analyzeDemo(a){
+  $('error').style.display='none'; $('injection').style.display='none';
+  const wazuh=renderWazuh(a); renderProcessDetails(a); const desc=wazuh.desc;
+  const auth=/login|logon|authentication|failed|failure|logowanie|uwierzyteln/i.test(desc+' '+JSON.stringify(a.rule?.groups||[]));
+  const summary=auth?'Alert wskazuje na nieudane lub podejrzane próby uwierzytelnienia. Warto zweryfikować, czy były oczekiwane.':`Alert opisuje zdarzenie: ${desc}. Sprawdź kontekst i powiązane zdarzenia na monitorowanym hoście.`;
+  const checks=auth?['Sprawdź w Windows Event Viewer zdarzenia logowania z tego samego czasu.','Zweryfikuj, czy konto i adres źródłowy należą do testu lub znanego użytkownika.','Porównaj inne alerty z tego hosta i przedziału czasu.']:['Otwórz szczegóły alertu w Wazuh i sprawdź surowe zdarzenie.','Sprawdź, czy na tym hoście wystąpiły podobne zdarzenia przed lub po tym czasie.','Zweryfikuj działanie z użytkownikiem lub właścicielem systemu.'];
+  const demoAnalysis={severity:wazuh.risk.key==='info'?'low':wazuh.risk.key,confidence:'Nieoceniona (tryb demonstracyjny)',summary,checks};
+  renderAI(demoAnalysis,'Analiza demonstracyjna',a);saveHistory(a,demoAnalysis,'Analiza demonstracyjna','demo');
+  const untrusted=[get(a,'full_log'),get(a,'data.message'),get(a,'data.command'),get(a,'message')].filter(x=>typeof x==='string').join(' ');
+  if(/ignore (all |previous |prior )?instructions|reveal (the )?(system prompt|prompt)|ignore.*rules|zignoruj.*instrukcj|ujawnij.*prompt/i.test(untrusted)){$('injection').textContent='Uwaga: tekst w treści alertu przypomina próbę prompt injection. Traktuj go jako niezaufane dane, nie jako polecenie dla analityka lub modelu.';$('injection').style.display='block';}
+  $('empty').style.display='none'; $('results').style.display='grid';
+}
+async function analyze(){
+  $('error').style.display='none';
+  let alertObj; try { const parsed=JSON.parse($('alert').value); if(!parsed || Array.isArray(parsed) || typeof parsed!=='object') throw new Error('Alert musi być obiektem JSON.'); alertObj=normalizeWazuhDocument(parsed); }
+  catch(e){ $('error').textContent='Nie mogę odczytać JSON: '+e.message; $('error').style.display='block'; $('results').style.display='none'; $('empty').style.display='block'; return; }
+  renderWazuh(alertObj); renderProcessDetails(alertObj); $('empty').style.display='none'; $('results').style.display='grid'; $('injection').style.display='none';
+  $('ai-risk').className='ai-severity'; $('ai-risk-label').textContent='Analiza w toku'; $('ai-summary').textContent='Model analizuje alert. To może chwilę potrwać przy pierwszym uruchomieniu.';
+  $('ai-facts').innerHTML='<div class="fact"><span>Pewność oceny</span><strong>Oczekuje na analizę</strong></div><div class="fact"><span>Źródło</span><strong>Ollama</strong></div>';
+  $('alert-facts').innerHTML=extractAlertFacts(alertObj).map(x=>`<li><code>${safeText(x)}</code></li>`).join(''); $('checks').innerHTML='';
+  $('ai-status').textContent='Trwa analiza przez lokalny model AI…';
+  const button=$('analyze'); button.disabled=true; button.textContent='Analizuję…';
+  $('alert').disabled=true; $('sample-picker').disabled=true; $('sample').disabled=true;
+  try {
+    const response=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(alertObj)});
+    const data=await response.json(); if(!response.ok) throw new Error(data.error||'Nie udało się uzyskać analizy.');
+    const a=data.analysis; renderAI(a,data.model,alertObj);saveHistory(alertObj,a,data.model,'ollama');
+    $('ai-status').textContent='Połączono z lokalnym modelem AI. Alert został przeanalizowany przez Ollama.';
+  } catch(e) { analyzeDemo(alertObj); $('ai-status').textContent='AI nie zwróciło analizy. Pokazuję wynik demonstracyjny: '+e.message; }
+  finally { button.disabled=false; button.textContent='Analizuj alert'; $('alert').disabled=false; $('sample-picker').disabled=false; $('sample').disabled=false; }
+}
+async function checkAI(){try{const r=await fetch('/api/status');const s=await r.json();$('ai-status').textContent=s.ok?(s.model_available?`AI gotowe: lokalny model ${s.model}.`:`Ollama działa, ale nie widzę modelu ${s.model}. Pobierz go poleceniem: ollama pull ${s.model}`):'Ollama jest niedostępne. Uruchom Ollama i aplikację przez start.bat.';}catch{$('ai-status').textContent='Uruchom aplikację przez start.bat, aby połączyć lokalny model AI.'}}
+function loadSample(key){$('alert').value=pretty(samples[key]); $('results').style.display='none'; $('empty').style.display='block'; $('ai-status').textContent='Przykład wczytany. Kliknij „Analizuj alert”, aby uruchomić AI.';}
+ $('alert').value=''; $('analyze').addEventListener('click',analyze); $('sample').addEventListener('click',()=>{$('sample-picker').value='failed-logins'; loadSample('failed-logins');});
+ $('clear-history').addEventListener('click',()=>{if(confirm('Usunąć wszystkie zapisane analizy z tej przeglądarki?')){localStorage.removeItem(HISTORY_KEY);renderHistory();}});renderHistory();
+$('sample-picker').addEventListener('change',e=>loadSample(e.target.value)); checkAI();
+</script>
+</body>
+</html>
